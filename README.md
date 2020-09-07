@@ -4,7 +4,7 @@ Python library, that helps you create animation with ease, to any python GUI fra
 ## Intorduction
 
 The Ez-Animations lib, add's the abilty to create animation scripts, link them to objects / groups of objects, and then animate them separately or all at once.<br>
-The Ez-Animations lib, also provides you will the ability to control the fps of the animation scripts, based on your preferences.
+Also the lib provides you will the ability to control the fps of the animation scripts, based on your preferences.
 
 
 * Animation Scripts (Animation Sequences) - Reusable sequence of animations, that will perform the animation on the selected object.
