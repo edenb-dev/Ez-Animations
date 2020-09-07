@@ -4,7 +4,7 @@ Python library, that helps you create animation with ease, to any python GUI fra
 ## Intorduction
 
 The Ez-Animations lib, add's the abilty to create animation scripts, link them to objects / groups of objects, and then animate them separately or all at once.<br>
-Also the lib provides you will the ability to control the fps of the animation scripts, based on your preferences.
+Also the lib provides you with the ability to control the fps of the animation scripts, based on your preferences.
 
 
 * Animation Scripts (Animation Sequences) - Reusable sequence of animations, that will perform the animation on the selected object.
@@ -55,7 +55,7 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
 ```
   Animation_Name = 'Movment_Along_Border'
 
-  Animation_Sequences = [lambda Object: [
+  Animation_Sequence = lambda Object: [
           Animation(Start_Value=50,   # Moving From Left To Right.
                     End_Value=500,
                     Animation_Duration=1,
@@ -75,10 +75,10 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
                     Animation_Duration=1,
                     Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
                     Time_Till_Animation_Start=3)
-  ]]
+  ]
 
-  # Adding/Loading The Animation Sequences.
-  Animation_M.Add_Animation_Sequence(Animation_Name, Animation_Sequences[0])
+  # Adding/Loading The Animation Sequence.
+  Animation_M.Add_Animation_Sequence(Animation_Name, Animation_Sequence)
 ```
 </details>
 
