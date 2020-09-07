@@ -116,6 +116,8 @@ def on_AnimationFinished(Object):
     root.mainloop()
 ```
 
+### More Examples Could Be Found In [Example]()
+
 ## Built With
 
 * [Ez_Timers](https://github.com/edenb-dev/Ez-Timers) - Used to for time management.
