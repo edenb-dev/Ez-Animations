@@ -21,21 +21,22 @@ You need to know exactly how to move, scale, rotate, change alpha, etc, inorder 
 **This example will show you how to create a simple animaiton using the library with the tkinter GUI framework.**
 
 1. Download the files, and place it in a known directory.
-2. Import the modules 'Animation' and 'Animation_Manager' to your python project.
+2. Import the modules 'Animation', 'Animation_Manager' and 'tkinter' to your python project.
 
 ```
 from Animator import Animation
 from Animation_Manager import Animation_Manager
-```
-3. Initialize the Animation_Manager object, with the FPS count you would like to use.
 
-*This is done in the global scope.*
+import tkinter as tk # GUI Framework
+```
+
+3. Initialize the Animation_Manager object, with the FPS count you would like to use.
 
 ```
 Animation_M = Animation_Manager(FPS=60)
 ```
 
-4. Create your animaiton sequence.
+4. Create & Load your animaiton sequence.
 
 The animaiton sequence is an array filled with Animation objects. Each Animation object has several settings.
 
@@ -43,14 +44,14 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
 * End_Value   - The ending value.
 * Animation_Duration - The duration the animation will take.
 * Function    - The logic on how to perform the animation.
-* Time_Till_Animation_Start - The duration to wait before the animation will start.
+* Time_Till_Animation_Start - The duration to wait before the animation will start. **( Optional )**
 
 *This simple script will move the object given, along the border of the window, and will complete a full rotation*
 
 ```
-    Animation_Name = 'Movment_Along_Border'
+Animation_Name = 'Movment_Along_Border'
 
-    Animation_Sequences = [lambda Object: [
+Animation_Sequences = [lambda Object: [
         Animation(Start_Value=50,   # Moving From Left To Right.
                   End_Value=500,
                   Animation_Duration=1,
@@ -70,11 +71,24 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
                   Animation_Duration=1,
                   Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
                   Time_Till_Animation_Start=3)
-    ]]
+]]
+
+# Adding/Loading The Animation Sequences.
+Animation_M.Add_Animation_Sequence(Animation_Name, Animation_Sequences[0])
 ```
+5. Add a function to start the animation.
 
+Start Animation takes several parameters :
 
-4. Load your animation sequence, into your Animation_Manager object.
+* Animation Name - The name of the animation, that was added to the Animation_Manager
+* Object - The object that the animation will be performed on.
+* On_Finish - The function that will run once the animation finishes. ( On_Finish pass to the function the object ) **( Optional )**
+
+```
+def run_Animation(Object):
+
+    Animation_M.Start_Animation('Movment_Along_Border', Object, On_Finish=on_AnimationFinished)
+```
 
 
 
