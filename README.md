@@ -50,36 +50,36 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
 
 
 <details>
-  <summary>Click to expand!</summary>
+  <summary>Click to expend the code :</summary>
   
-      ```
-        Animation_Name = 'Movment_Along_Border'
+```
+  Animation_Name = 'Movment_Along_Border'
 
-        Animation_Sequences = [lambda Object: [
-                Animation(Start_Value=50,   # Moving From Left To Right.
-                          End_Value=500,
-                          Animation_Duration=1,
-                          Function=lambda New_X_Cords: Object.place(x=New_X_Cords, y=Object.winfo_y())),
-                Animation(Start_Value=50,   # Moving From Top To Bottom.
-                          End_Value=310,
-                          Animation_Duration=1,
-                          Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
-                          Time_Till_Animation_Start=1),
-                Animation(Start_Value=500,  # Moving From Right To Left.
-                          End_Value=50,
-                          Animation_Duration=1,
-                          Function=lambda New_X_Cords: Object.place(x=New_X_Cords, y=Object.winfo_y()),
-                          Time_Till_Animation_Start=2),
-                Animation(Start_Value=310,  # Moving From Bottom To Top.
-                          End_Value=50,
-                          Animation_Duration=1,
-                          Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
-                          Time_Till_Animation_Start=3)
-        ]]
+  Animation_Sequences = [lambda Object: [
+          Animation(Start_Value=50,   # Moving From Left To Right.
+                    End_Value=500,
+                    Animation_Duration=1,
+                    Function=lambda New_X_Cords: Object.place(x=New_X_Cords, y=Object.winfo_y())),
+          Animation(Start_Value=50,   # Moving From Top To Bottom.
+                    End_Value=310,
+                    Animation_Duration=1,
+                    Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
+                    Time_Till_Animation_Start=1),
+          Animation(Start_Value=500,  # Moving From Right To Left.
+                    End_Value=50,
+                    Animation_Duration=1,
+                    Function=lambda New_X_Cords: Object.place(x=New_X_Cords, y=Object.winfo_y()),
+                    Time_Till_Animation_Start=2),
+          Animation(Start_Value=310,  # Moving From Bottom To Top.
+                    End_Value=50,
+                    Animation_Duration=1,
+                    Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
+                    Time_Till_Animation_Start=3)
+  ]]
 
-        # Adding/Loading The Animation Sequences.
-        Animation_M.Add_Animation_Sequence(Animation_Name, Animation_Sequences[0])
-      ```
+  # Adding/Loading The Animation Sequences.
+  Animation_M.Add_Animation_Sequence(Animation_Name, Animation_Sequences[0])
+```
 </details>
 
 
