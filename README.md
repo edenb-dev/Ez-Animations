@@ -90,7 +90,7 @@ Start Animation takes several parameters :
 * Animation Name - The name of the animation, that was added to the Animation_Manager
 * Object - The object that the animation will be performed on.
 * On_Finish - Function that will excute once the animation finishes. **( Optional )**<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Also the object use in the animation passes to the function as a parameter. 
+&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Also the object used in the animation passes as a parameter to the function. 
 
 ```
 def run_Animation(Object):
