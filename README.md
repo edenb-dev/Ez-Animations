@@ -52,7 +52,7 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
 <details>
   <summary>Click to expand!</summary>
   
-        ```
+      ```
         Animation_Name = 'Movment_Along_Border'
 
         Animation_Sequences = [lambda Object: [
@@ -79,7 +79,7 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
 
         # Adding/Loading The Animation Sequences.
         Animation_M.Add_Animation_Sequence(Animation_Name, Animation_Sequences[0])
-        ```
+      ```
 </details>
 
 
