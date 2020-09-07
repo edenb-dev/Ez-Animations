@@ -34,16 +34,47 @@ from Animation_Manager import Animation_Manager
 ```
 Animation_M = Animation_Manager(FPS=60)
 ```
-4. Load your animation sequence, into your Animation_Manager object.
+
 4. Create your animaiton sequence.
 
-The animaiton sequence is an array filled with Animation objects.
-Each Animation object has several settings.
+The animaiton sequence is an array filled with Animation objects. Each Animation object has several settings.
+
 * Start_Value - The starting value.
 * End_Value   - The ending value.
 * Animation_Duration - The duration the animation will take.
 * Function    - The logic on how to perform the animation.
 * Time_Till_Animation_Start - The duration to wait before the animation will start.
+
+*This simple script will move the object given, along the border of the window, and will complete a full rotation*
+
+```
+    Animation_Name = 'Movment_Along_Border'
+
+    Animation_Sequences = [lambda Object: [
+        Animation(Start_Value=50,   # Moving From Left To Right.
+                  End_Value=500,
+                  Animation_Duration=1,
+                  Function=lambda New_X_Cords: Object.place(x=New_X_Cords, y=Object.winfo_y())),
+        Animation(Start_Value=50,   # Moving From Top To Bottom.
+                  End_Value=310,
+                  Animation_Duration=1,
+                  Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
+                  Time_Till_Animation_Start=1),
+        Animation(Start_Value=500,  # Moving From Right To Left.
+                  End_Value=50,
+                  Animation_Duration=1,
+                  Function=lambda New_X_Cords: Object.place(x=New_X_Cords, y=Object.winfo_y()),
+                  Time_Till_Animation_Start=2),
+        Animation(Start_Value=310,  # Moving From Bottom To Top.
+                  End_Value=50,
+                  Animation_Duration=1,
+                  Function=lambda New_Y_Cords: Object.place(x=Object.winfo_x(), y=New_Y_Cords),
+                  Time_Till_Animation_Start=3)
+    ]]
+```
+
+
+4. Load your animation sequence, into your Animation_Manager object.
 
 
 
