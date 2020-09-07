@@ -50,7 +50,7 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
 
 
 <details>
-  <summary>Click To Show</summary>
+  <summary>Click To Show Code</summary>
   
 ```
   Animation_Name = 'Movment_Along_Border'
