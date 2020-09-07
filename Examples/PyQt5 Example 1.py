@@ -22,7 +22,7 @@ class Window(QWidget):
         # Getting The User's Screen Resolution.
         ScreenGeometry = QDesktopWidget().screenGeometry()
 
-        self.Title = "EZ-Animation Example 2 ( PyQt5 )"
+        self.Title = "EZ-Animation Example 1 ( PyQt5 )"
 
         self.Width = 640
         self.Height = 360
