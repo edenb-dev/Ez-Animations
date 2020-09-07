@@ -1,4 +1,15 @@
 
+class Waiter():
+
+    def __init__(self, Wait):
+
+        self.Wait = Wait
+        self.Time_Till_Animation_Start = 0
+
+    def Animate(self, Time):
+
+        return True if self.Wait <= Time else False
+
 
 class Animation():
 

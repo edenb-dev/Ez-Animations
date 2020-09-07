@@ -8,7 +8,7 @@ from Animation_Wrapper import Animation_Wrapper
 
 class Animation_Manager():
 
-    def __init__(self, FPS=60):
+    def __init__(self, FPS=60, Must_Function_Every_Frame=None):
 
         self.FPS = 1/FPS                # Times Per Sec The Animator Will Update.
         self.Animation_Sequences = {}   # Animation Scripts. ( Key = Animation_Name , Value = Animation_Sequence)
@@ -19,6 +19,7 @@ class Animation_Manager():
         self._All_Group_Activated = False   # Flag That Indicates If All The Groups Activated At The Same Time.
         self._Finished_Loading = 0          # When At 0 Indicates That All The Objects Have Loaded, To The 'Animated_Object_List'.
 
+        self.Must_Function_Every_Frame = Must_Function_Every_Frame
         self.Repeated_Timer = Repeated_Timer(self.FPS, self.Upadting_Animation)
 
     # ----------------------------------------------------- #
@@ -30,7 +31,7 @@ class Animation_Manager():
 
         self.Animation_Sequences.update({Animation_Name: Animation_Sequence})  # Updating The 'Animation_Sequences'.
 
-    def Add_Animation_Queue(self, Animation_Name, Object, Group_Identifier):
+    def Add_Animation_Queue(self, Animation_Name, Object, On_Finish=None, Group_Identifier='Default_Group'):
         '''
             This Function Lets The User Group Objects,
             To Be Animated Together.
@@ -43,7 +44,7 @@ class Animation_Manager():
 
         # Adding The Object To The Group.
         Temp_List = self.Animation_Queue.get(Group_Identifier)
-        Temp_List.append({'Animation_Name': Animation_Name, 'Object': Object})
+        Temp_List.append({'Animation_Name': Animation_Name, 'Object': Object, 'On_Finish': On_Finish})
         self.Animation_Queue.update({Group_Identifier: Temp_List})
 
     # ------------- Start Animation Functions ------------- #
@@ -74,15 +75,18 @@ class Animation_Manager():
                 self._Finished_Loading += len(self.Animation_Queue.get(Group_Identifier))
 
         for Group_Identifier in Groups_Identifiers:  # Running Thru All The Groups Identifiers.
-            for Animation_Element in self.Animation_Queue.get(Group_Identifier):  # Running Thru All The Objects In The Group.
-                self.Start_Animation(Animation_Element.get('Animation_Name'), Animation_Element.get('Object'))  # Starting The Animation On The Object.
 
-    def Start_Animation(self, Animation_Name, Object):
+            for Animation_Element in self.Animation_Queue.get(Group_Identifier):  # Running Thru All The Objects In The Group.
+                self.Start_Animation(Animation_Element.get('Animation_Name'), Animation_Element.get('Object'), Animation_Element.get('On_Finish'))  # Starting The Animation On The Object.
+
+            self.Animation_Queue.update({Group_Identifier: []})  # Removing The Objects From The Group.
+
+    def Start_Animation(self, Animation_Name, Object, On_Finish=None):
         '''
             Start The Aninmation Of One Object.
         '''
 
-        self.Animated_Objects_List.append(Animation_Wrapper(self.Animation_Sequences.get(Animation_Name)(Object)))
+        self.Animated_Objects_List.append(Animation_Wrapper(self.Animation_Sequences.get(Animation_Name)(Object), Object, On_Finish))
 
         if self._Finished_Loading > 1:  # Checking If More Then One Object Need To Loaded.
 
@@ -116,26 +120,34 @@ class Animation_Manager():
 
         if self.Animated_Objects_List:  # Checking If There Are Animations To Animate.
 
-            # * When Removing An Element, All The Elements Shift Place One Index Back.
-            Counter_Elements_Removed = 0  # Counting The Current Number Of Shifted Elements.
-            Flagged_Indexes = []  # Holds The Indexes Of Animations That Have Finished To Animate.
+            Copyed_List = []
 
-            for Index, Animation_Wrap in enumerate(self.Animated_Objects_List):
+            for Animation_Wrap in self.Animated_Objects_List:
 
                 if Animation_Wrap.Animate(self.FPS):
 
-                    Flagged_Indexes.append(Index - Counter_Elements_Removed)  # Saving The Index Of The Finised Animation.
-                    Counter_Elements_Removed += 1  # Updating The Counter.
+                    # ---------------- #
+                    if Animation_Wrap.On_Finish:
 
-            # Removing Elements At The Flagged Index From The 'Animated_Objects_List' List.
-            for Index in Flagged_Indexes:  # Going Thru The Flagged Indexes.
+                        Animation_Wrap.On_Finish(Animation_Wrap.Object)
 
-                self.Animated_Objects_List.remove(self.Animated_Objects_List[Index])  # Removing The Animation From The 'Animated_Objects_List' List.
+                else:
+                    Copyed_List.append(Animation_Wrap)
+
+            self.Animated_Objects_List = Copyed_List
+
+            if self.Must_Function_Every_Frame:
+
+                self.Must_Function_Every_Frame()
 
             if not self.Animated_Objects_List:  # Checking If All Animations Had Finished.
 
                 self.Stop_Clock()  # Stopping The Clock.
 
         else:  # No Animations To Animate.
+
+            if self.Must_Function_Every_Frame:
+
+                self.Must_Function_Every_Frame()
 
             self.Stop_Clock()  # Stopping The Clock.

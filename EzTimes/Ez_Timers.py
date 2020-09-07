@@ -5,6 +5,18 @@ from threading import Thread
 
 
 class Repeated_Timer():
+    '''
+        Helper object, that assists in executing task repeatedly at specific intervals.
+        * Manages Task drifting, and error handling.
+
+        Parameters:
+
+            Interval :  The amount of time between function executions.
+            Task :      The function to be executed.
+
+            Args :      Arguments to parse to the function.
+            KWArgs :    Keyword Arguments to parse to the function.
+    '''
 
     def __init__(self, Interval, Task, *Args, **KWArgs):
 
@@ -17,14 +29,20 @@ class Repeated_Timer():
         self.__Stop_Flag__ = True   # Indicates When To Stop Repeating The Timer. ( Task )
 
     def Start(self):  # Start's The Repeat Method.
+        '''
+            Starts Repeating The Task.
+        '''
 
         if self.__Stop_Flag__:  # Making Sure That The Timer Isn't Running.
 
             self.__Stop_Flag__ = False  # Updating The Stop Indicator.
 
-            Thread(target=self.__Repeat__).start()  # Init And Starting The Thread.
+            Thread(target=self.__Repeat__, daemon=True).start()  # Init And Starting The Thread.
 
     def Stop(self):  # Stop's The Repeat Method.
+        '''
+            Stops Repeating The Task.
+        '''
 
         self.__Stop_Flag__ = True  # Updating The Stop Indicator.
 
@@ -53,18 +71,18 @@ class Repeated_Timer():
         # Pre-Calculations :
         Estimated_Sleep_Time = Time() + self.Interval
 
-        while not self.__Stop_Flag__:  # Contunie Executing, If The Stop Flag Is False.
+        try:  # Trying To Execute The Given Task.
 
-            try:  # Executing The Task.
+            while not self.__Stop_Flag__:  # Continue Executing, If The Stop Flag Is False.
 
-                self.Task(*self.Args, **self.KWArgs)
+                self.Task(*self.Args, **self.KWArgs)  # Executing The Task.
 
-            except Exception as Error:
+                After_Task_Sleep_Time = max(0, Estimated_Sleep_Time - Time())  # Preventing Task Drifting.
 
-                print(f'An Error Has Occurred While Executing The Task :\n{Error}')
+                Sleep(After_Task_Sleep_Time)  # Calculating The New Sleep Time.
 
-            After_Task_Sleep_Time = max(0, Estimated_Sleep_Time - Time())  # Preventing Task Drifting.
+                Estimated_Sleep_Time += self.Interval  # Updating The 'Estimated_Sleep_Time'.
 
-            Sleep(After_Task_Sleep_Time)  # Calculating The New Sleep Time.
+        except Exception as Error:  # Catching The Error.
 
-            Estimated_Sleep_Time += self.Interval  # Updating The 'Estimated_Sleep_Time'.
+            print(f'An Error Has Occurred While Executing The Task :\n{Error}')
