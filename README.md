@@ -83,14 +83,13 @@ The animaiton sequence is an array filled with Animation objects. Each Animation
 </details>
 
 
-
 5. Add a function to start the animation.
 
 Start Animation takes several parameters :
 
 * Animation Name - The name of the animation, that was added to the Animation_Manager
 * Object - The object that the animation will be performed on.
-* On_Finish - The function that will run once the animation finishes. **( Optional )**<br>On_Finish also passes to the function the object used for the animation. 
+* On_Finish - Function that will excute once the animation finishes. **( Optional )**<br>On_Finish also passes to the function the object used in the animation. 
 
 ```
 def run_Animation(Object):
@@ -98,6 +97,23 @@ def run_Animation(Object):
     Animation_M.Start_Animation('Movment_Along_Border', Object, On_Finish=on_AnimationFinished)
 ```
 
+Add the following code, only if you added the On_Finish parameter.
 
+```
+def on_AnimationFinished(Object):
+    print("Finished Animating !~!")
+```
+
+6. Finally create the tkinter window with a button, that when clicked excutes the run_Animation function.
+
+```    
+    root = tk.Tk()
+    root.geometry("640x360")
+
+    My_Button = tk.Button(root, text="Animate Me", command=lambda: run_animation(My_Button))
+    My_Button.place(x=50, y=50)
+
+    root.mainloop()
+```
 
 
