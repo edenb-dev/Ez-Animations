@@ -1,6 +1,6 @@
 
-# EzTimes Lib:
-from EzTimes.Ez_Timers import Repeated_Timer
+# Ez_Timers Lib:
+from Ez_Timers.Ez_Timers import Repeated_Timer
 
 
 from Animation_Wrapper import Animation_Wrapper
