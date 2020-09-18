@@ -24,7 +24,7 @@ You need to know exactly how to move, scale, rotate, change alpha, etc, inorder 
 
 ## How to use
 
-**This example will show you how to create a simple animaiton using the library with the tkinter GUI framework.**
+**This example will show you how to create a simple animaiton using the library with the Tkinter GUI framework.**
 
 1. Download the files, and place it in a known directory.
 2. Import the modules 'Animation', 'Animation_Manager' and 'tkinter' to your python project.
