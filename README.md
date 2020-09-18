@@ -1,6 +1,12 @@
 # Ez-Animations
 Python library, that helps you create animation with ease, to any python GUI framework.
 
+| Example 1 | Example 2 |
+|      :---:       |      :---:      |
+![Tkinter Example 1](https://user-images.githubusercontent.com/70844165/93649837-90463980-fa15-11ea-8346-1926f65d37f3.gif)  | ![Tkinter Example 2](https://user-images.githubusercontent.com/70844165/93649835-8e7c7600-fa15-11ea-8b2c-5accf2f4d032.gif) |
+| **Animation script, that combines multiple animations.** | ***One*** **animation script, that changes the speed of the animation, base on the button's y value.** |
+
+
 ## Intorduction
 
 The Ez-Animations lib, add's the abilty to create animation scripts, link them to objects / groups of objects, and then animate them separately or all at once.<br>
